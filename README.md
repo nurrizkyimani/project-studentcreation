@@ -1,4 +1,4 @@
-# project-studentcreation
+# Project Student Creation
 A website to find team for creating project together
 
 # Stack 
