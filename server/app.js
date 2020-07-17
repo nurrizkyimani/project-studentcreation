@@ -11,7 +11,6 @@ app.use(parser.urlencoded({extended: true}))
 app.use(parser.json())
 
 app.set('port', process.env.PORT || 3000)
-app.set('view engine', 'hbs')
 
 app.use(cors())
 
