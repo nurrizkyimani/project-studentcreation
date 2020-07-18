@@ -5,7 +5,7 @@ exports.up = function(knex) {
 			table.string('name').notNullable();
 			table.string('faculty').notNullable();
 			table.string('department');
-			table.string('year');
+			table.integer('year');
 			table.string('linkedin');
 			table.string('line');
 		})

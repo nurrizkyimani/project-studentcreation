@@ -1,13 +1,27 @@
 
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('table_name').del()
+  return knex('users').del()
     .then(function () {
       // Inserts seed entries
-      return knex('table_name').insert([
-        {id: 1, colName: 'rowValue1'},
-        {id: 2, colName: 'rowValue2'},
-        {id: 3, colName: 'rowValue3'}
+      return knex('users').insert([
+        {
+          name: 'Nurrizky',
+          faculty: 'MIPA',
+          department: 'mipa',
+          year: 2022,
+          linkedin: 'http://jos.com',
+          line: '@bocahbotbot'
+        },
+        {
+          name: 'Iman',
+          faculty: 'MIPA',
+          department: 'Ilkom',
+          year: 2023,
+          linkedin: 'http://josoooo.com',
+          line: '@bocahbotbotbotbot'
+        },
+        
       ]);
     });
 };
