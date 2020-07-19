@@ -20,6 +20,7 @@ const router = express.Router()
 app.use(cors())
 
 app.use('/user', require('./routes/Users'))
+app.use('/project', require('./routes/Projects'))
 
 const PORT =  process.env.PORT || 7000
 

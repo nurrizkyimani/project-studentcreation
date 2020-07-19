@@ -1,7 +1,9 @@
 exports.up = function(knex) {
 	Promise.all([
 		knex.schema.createTable('projects', (table) => {
-			table.uuid('id').primary();
+			table.uuid('id').primary()
+				// .defaultTo(knex.raw('UUID()'));
+
 			table.string('title').notNullable();
 			table.text('description');
 			table.string('topic');
