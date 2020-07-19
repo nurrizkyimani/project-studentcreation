@@ -6,6 +6,24 @@ const knexConnection = Knex(connectionConfig)
 
 Model.knex(knexConnection)
 
+class Project extends Model {
+    static get tableName() {
+        return 'projects'
+    }
+
+    static get relationMappings() {
+        return {
+            user: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: User,
+                join: {
+                    from: projects,
+                    to: 'project.id'
+                }
+            }
+        }
+    }
+}
 
 class User extends Model {
     static get tableName() {
@@ -14,14 +32,16 @@ class User extends Model {
 
     static get relationMappings() {
         return {
-            project: {
-                relation: Model.BelongsToOneRelation,
+            projects: {
+                relation: Model.HasManyRelation,
                 modelClass: Project,
                 join: {
-                    from: 
-                    to: 'project.id'
+                    from: 'users.id',
+                    to: 'projects.users_id'
                 }
+
             }
         }
     }
 }
+module.exports = { Project, User}

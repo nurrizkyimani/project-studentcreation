@@ -1,21 +1,30 @@
 const express = require('express')
 const cors = require('cors')
 const parser = require('body-parser')
-
-
+const morgan = require('morgan')
 require('dotenv').config()
 
 const app = express()
 
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
+
 app.use(parser.urlencoded({extended: true}))
 app.use(parser.json())
 
-app.set('port', process.env.PORT || 3000)
+const { json } = require('body-parser')
+
+const router = express.Router()
 
 app.use(cors())
 
-app.listen(app.get('port'), () => {
-  console.log('Hello world!')
+app.use('/user', require('./routes/Users'))
+
+const PORT =  process.env.PORT || 7000
+
+app.listen(PORT , () => {
+   console.log(`PORT LISTEN TO ${process.env.NODE_ENV} mode on port ${PORT}`)
 })
 
 
