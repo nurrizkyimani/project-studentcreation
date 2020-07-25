@@ -22,6 +22,13 @@ app.use(cors())
 app.use('/user', require('./routes/Users'))
 app.use('/project', require('./routes/Projects'))
 
+app.get('/', (req, res) => {
+  res.send({
+    success: true, 
+    info: 'this is main route'
+  })
+})
+
 const PORT =  process.env.PORT || 7000
 
 app.listen(PORT , () => {

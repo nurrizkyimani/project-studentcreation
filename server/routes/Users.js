@@ -7,16 +7,18 @@ const { Project, User } = require('../models/schema');
 router.get('/all', async (req, res) => {
 	console.log('user in ');
 	const user = await User.query();
-	// res.json(user)
 
 	res.json({
 		success: true,
-		info: 'success connection with heroku',
+		info: 'success heroku connection, get all user data',
 		data : user
 	});
+
+	
+
 });
 
-router.get('/', (req, res) => {
+router.get('/:slug', (req, res) => {
 	res.json({
 		success: true,
 		info: 'this is user route'
@@ -24,9 +26,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/submit', (req, res) => {
-	
 	const body = req.body
-
 
 	res.json({
 		success: true,

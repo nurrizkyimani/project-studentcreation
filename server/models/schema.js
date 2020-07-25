@@ -13,12 +13,12 @@ class Project extends Model {
 
 	static get relationMappings() {
 		return {
-			user: {
+			users: {
 				relation: Model.BelongsToOneRelation,
 				modelClass: User,
 				join: {
-					from: projects,
-					to: 'project.id'
+					from: 'projects.users_id',
+					to: 'users.id'
 				}
 			}
 		};
