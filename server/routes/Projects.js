@@ -16,5 +16,16 @@ router.get('/projects', async (req, res) => {
     })
 })
 
+router.post('/projects', async (req, res) => {
+    const body = req.body
+
+    res.json({
+        success: true, 
+        info: 'connect to heroku and post data',
+    })
+})
+
+
+
 
 module.exports = router
