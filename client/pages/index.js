@@ -1,44 +1,65 @@
-import Nav from '../components/nav'
+import Nav from '../components/nav';
 import React, { useState, useEffect } from 'react';
-
-
-
-
-
+import axios from 'axios';
 
 export default function IndexPage() {
+	const [ projects, setProjects ] = useState([]);
 
-  const API_URL = process.env.API_URL
+	useEffect(() => {
+		const fetching = async () => {
+			try {
+				const res = await axios.get(`${process.env.API_URL}/project/all`);
+				setProjects(res.data.data);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		fetching();
+	}, []);
 
-  useEffect(() => {
-    console.log(API_URL);
-    fetch(`local/project/all`, {
-      method: 'GET',
-      // headers: {
-      //   'Authorization': 'Bearer' + authToken
-      // }
-    })
-    .then(res => res.json())
-    .then(data => { console.log(data) })
-    .catch(err => { console.log(err) })
-  }, []);
+	useEffect(
+		() => {
+			console.log(projects);
+		},
+		[ projects ]
+	);
 
+	return (
+		<div>
+			<Nav />
+			<div className="">
+				<h1 className="text-center text-2xl pb-10">Next.js + Tailwind CSS</h1>
+        <div
+          className="flex w-full justify-around flex-wrap px-3 "
+          onClick={(e) => console.log('click')}
+          >
+					{projects.map((project) => (
+						<div
+							className="container max-w-md shadow-xl bg-gray-300 p-10 rounded-md border mb-8 transform hover:scale-105 duration-200 hover:shadow-2xl"
+							key={project.id}
+						>
+              <div className="items-center text-gray">
+								<h1 className="text-2xl">{project.title}</h1>
+              </div>
 
+							<div className="items-center mt-4 text-gray">
+								<h1 className="text-md">Description</h1>
+								<h3 className="text-gray-600 ">{project.description}</h3>
+              </div>
 
-  return (
-    <div>
-      <Nav />
-      <div className="hero">
-        <h1 className="title">Next.js + Tailwind CSS</h1>
-        <div className="flex p-10">
-          
-          <div className="w-1/4 shadow-xl bg-gray-300 p-10 rounded-md border  ">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad dignissimos voluptatem similique excepturi sapiente delectus culpa natus atque odit. Aspernatur, consequatur! Laboriosam quae culpa, modi doloremque magni voluptatem voluptatibus repellat hic illo veniam, eum ab nisi id tenetur natus soluta nulla dignissimos eos dolores facere itaque ipsam eius sequi dicta?
-          </div>
+              <div className="items-center mt-4 text-gray">
+								<h1 className="text-md">Member</h1>
+								<h3 className="text-gray-600 ">{project.member}</h3>
+              </div>
 
-
-        </div>
-      </div>
-    </div>
-  )
+              <div className="items-center mt-4 text-gray">
+								<h1 className="text-md">Topic</h1>
+								<h3 className="text-gray-600 ">{project.topic}</h3>
+              </div>
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
+	);
 }
