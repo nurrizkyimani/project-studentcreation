@@ -18,12 +18,18 @@ router.get('/all', async (req, res) => {
 
 });
 
-router.get('/:slug', (req, res) => {
-	res.json({
-		success: true,
-		info: 'this is user route'
-	});
-});
+router.get('/:userId', async (req, res) => {
+    const user = req.params.userId
+
+    const result = await Project.query().where('users_id' , user)
+
+    res.json({
+        success: true, 
+        info: `connect to heroku, GET data by id ${user}` ,
+        id: result
+    })
+})
+
 
 router.post('/submit', (req, res) => {
 	const body = req.body

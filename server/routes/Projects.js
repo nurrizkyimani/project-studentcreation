@@ -42,6 +42,7 @@ router.get('/:slug', async (req, res) => {
     })
 })
 
+
 router.put('/:slug', async (req, res) => {
     const slug = req.params.slug
     const requestBody = req.body
